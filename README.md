@@ -2,6 +2,8 @@
 
 MCP server locale per eseguire query database da Claude Code in modo sicuro. Le credenziali sono nel Portachiavi Apple, ogni connessione ha un livello di permessi che controlla quali operazioni sono consentite, e tutte le query vengono loggate per audit.
 
+![MCP Query - Web UI](docs/demo.png)
+
 ## Requisiti
 
 - Python >= 3.10
