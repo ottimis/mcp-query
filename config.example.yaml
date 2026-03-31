@@ -1,0 +1,44 @@
+# MCP Query - Configuration Example
+# Copy this file to ~/.mcp-query/config.yaml and customize.
+# Passwords are stored in macOS Keychain, not in this file.
+# Set passwords with: mcp-query set-password <connection-name>
+
+defaults:
+  max_rows: 500           # Default row limit for SELECT queries
+  permissions: read       # Default permission level (read | write | admin)
+  log_retention_days: 30  # Auto-delete logs older than this
+
+connections:
+  # MySQL example
+  local-mysql:
+    driver: mysql
+    host: localhost
+    port: 3306
+    database: myapp
+    user: root
+    permissions: write
+    max_rows: 1000
+
+  # PostgreSQL example
+  local-pgsql:
+    driver: pgsql
+    host: localhost
+    port: 5432
+    database: analytics
+    user: postgres
+    permissions: read
+
+  # Custom permissions: only SELECT and INSERT
+  staging-api:
+    driver: mysql
+    host: staging-db.example.com
+    port: 3306
+    database: api
+    user: developer
+    permissions: [select, insert]
+
+  # SQLite example (no password needed)
+  local-sqlite:
+    driver: sqlite
+    database: /path/to/database.sqlite
+    permissions: admin
