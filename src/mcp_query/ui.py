@@ -324,6 +324,7 @@ async function loadConnections() {
       <div class="card-header">
         <span class="card-title">${c.name}</span>
         <div class="btn-group">
+          <button class="btn btn-sm" onclick="copyClaudeMd('${c.name}')" title="Copy CLAUDE.md snippet">Copy for CLAUDE.md</button>
           <button class="btn btn-sm" onclick="testConn('${c.name}')">Test</button>
           <button class="btn btn-sm" onclick="editConn('${c.name}')">Edit</button>
           <button class="btn btn-sm btn-danger" onclick="deleteConn('${c.name}')">Delete</button>
@@ -488,6 +489,23 @@ function escHtml(s) {
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML;
+}
+
+// Copy CLAUDE.md snippet
+function copyClaudeMd(name) {
+  const snippet = `## Database\nPer le query al database usare il tool MCP \`query\` con connessione \`${name}\`.`;
+  navigator.clipboard.writeText(snippet).then(() => {
+    toast('Copied to clipboard');
+  }, () => {
+    // Fallback for non-HTTPS contexts
+    const ta = document.createElement('textarea');
+    ta.value = snippet;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    toast('Copied to clipboard');
+  });
 }
 
 // ESC to close modal
